@@ -19,7 +19,7 @@ export default {
     queryInstances: action(QUERY_INSTANCES, InstancesClient.getInstances)
   },
   mutations: {
-    [QUERY_INSTANCES]: begin('isQueryInstancesLoading', 'isLogoutError'),
+    [QUERY_INSTANCES]: begin('isQueryInstancesLoading', 'queryInstancesError'),
     [QUERY_INSTANCES_SUCCESS]: one('isQueryInstancesLoading', 'instances'),
     [QUERY_INSTANCES_FAILURE]: error('isQueryInstancesLoading', 'queryInstancesError')
   }
