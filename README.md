@@ -1,4 +1,5 @@
 # Vuexi
+```npm install vuexi```
 
 ```javascript
 import * as InstancesClient from '@/resources/instances'
