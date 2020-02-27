@@ -4,7 +4,7 @@ const begin = (loadingField, errorField, func = Function.prototype) => state => 
   func(state)
 }
 
-const one = (loadingField, resultField) => (state, payload = null) => {
+const success = (loadingField, resultField) => (state, payload = null) => {
   state[loadingField] = false
 
   if (resultField.call) {
@@ -20,9 +20,20 @@ const error = (loadingField, errorField, func = Function.prototype) => (state, e
   func(state)
 }
 
-const action = (type, func) => async (context, request) => {
+const query = (type, func) => async (context, request) => {
   try {
     context.commit(type)
+    const { data: response } = await func(request)
+    context.commit(`${type}_SUCCESS`, response)
+    return response
+  } catch (err) {
+    context.commit(`${type}_FAILURE`, err)
+    throw err
+  }
+}
+
+const poll = (type, func) => async (context, request) => {
+  try {
     const { data: response } = await func(request)
     context.commit(`${type}_SUCCESS`, response)
     return response
@@ -68,10 +79,11 @@ function commit(event) {
 
 module.exports = {
   begin,
-  one,
+  success,
   error,
-  action,
+  query,
   removeById,
+  poll,
   push,
   cached,
   commit,
