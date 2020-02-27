@@ -1,5 +1,6 @@
 # Vuexi
 Vuexi is a toolset of small but very useful functions to reduce vuex code base for async flow.
+To check entire functionality consider to look into index.js file.
 ```npm install vuexi```
 
 ```javascript
