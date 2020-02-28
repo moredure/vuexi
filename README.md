@@ -5,6 +5,7 @@ To check entire functionality consider to look into index.js file. Also soon you
 ```npm install mikefaraponov/vuexi```
 
 ```javascript
+// some random vuex module for view with instances
 import * as InstancesClient from '@/resources/instances'
 import { begin, success, error, query, poll } from 'vuexi'
 
