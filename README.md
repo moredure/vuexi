@@ -2,7 +2,7 @@
 Vuexi is a toolset of small but very useful functions to reduce vuex code base for async flows.
 To check entire functionality consider to look into index.js file. Also soon you will be able to checkout presentation of this library in https://odessafrontend.com/15/ check out YouTube section.
 
-```npm install mikefaraponov/vuexi@master```
+```npm install mikefaraponov/vuexi```
 
 ```javascript
 import * as InstancesClient from '@/resources/instances'
