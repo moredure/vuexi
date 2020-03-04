@@ -14,6 +14,10 @@ const success = (loadingField, resultField) => (state, payload = null) => {
   }
 }
 
+const silence = (loadingField) => (state) => {
+  state[loadingField] = false
+}
+
 const error = (loadingField, errorField, func = Function.prototype) => (state, err) => {
   state[loadingField] = false
   state[errorField] = err
@@ -87,4 +91,5 @@ module.exports = {
   push,
   cached,
   commit,
+  silence,
 }
