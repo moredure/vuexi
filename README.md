@@ -11,6 +11,9 @@ import * as InstancesClient from '@/resources/instances'
 export function getInstances({ projectId }) {
   return HTTP.get(`/projects/${projectId}/instances`)
 }
+export function createInstance({ projectId, ...options }) {
+  return HTTP.post(`/projects/${projectId}/instances`, options)
+}
 */
 import { begin, success, error, query, poll } from 'vuexi'
 
