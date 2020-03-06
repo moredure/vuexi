@@ -7,6 +7,11 @@ To check entire functionality consider to look into index.js file. Also soon you
 ```javascript
 // some random vuex module for view with instances
 import * as InstancesClient from '@/resources/instances'
+/*
+export function getInstances({ projectId }) {
+  return HTTP.get(`/projects/${projectId}/instances`)
+}
+*/
 import { begin, success, error, query, poll } from 'vuexi'
 
 const QUERY_INSTANCES = 'QUERY_INSTANCES'
