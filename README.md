@@ -15,7 +15,7 @@ export function createInstance({ projectId, ...options }) {
   return HTTP.post(`/projects/${projectId}/instances`, options)
 }
 */
-import { begin, success, error, query, poll } from 'vuexi'
+const { begin, success, error, query, poll } = require('vuexi')
 
 const QUERY_INSTANCES = 'QUERY_INSTANCES'
 const QUERY_INSTANCES_SUCCESS = 'QUERY_INSTANCES_SUCCESS'

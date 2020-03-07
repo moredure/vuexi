@@ -48,14 +48,14 @@ const poll = (type, func) => async (context, request) => {
 }
 
 function removeById(loadingField, name) {
-  return one(loadingField, (state, argument) => {
+  return success(loadingField, (state, argument) => {
     const index = state[name].findIndex(each => each.id === argument.id)
     state[name].splice(index, 1)
   })
 }
 
 function push(loadingField, name) {
-  return one(loadingField, (state, argument) => state[name].push(argument))
+  return success(loadingField, (state, argument) => state[name].push(argument))
 }
 
 const cached = (type, call, moduleName, modulePath) => async (context, request) => {
@@ -91,5 +91,5 @@ module.exports = {
   push,
   cached,
   commit,
-  silence,
+  silence
 }
