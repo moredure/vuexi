@@ -85,3 +85,18 @@ export const execute = (loadingField, resultField, func) => (state) => {
   state[loadingField] = false
   state[resultField] = func()
 }
+
+export function route (path, component, options = {}) {
+  return {
+    path,
+    component,
+    ...options
+  }
+}
+
+export function prefix (path, routes) {
+  return routes.map(route => {
+    route.path = path + route.path
+    return route
+  })
+}

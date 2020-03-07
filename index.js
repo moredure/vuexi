@@ -86,6 +86,21 @@ const execute = (loadingField, resultField, func) => (state) => {
   state[resultField] = func()
 }
 
+function route (path, component, options = {}) {
+  return {
+    path,
+    component,
+    ...options
+  }
+}
+
+function prefix (path, routes) {
+  return routes.map(route => {
+    route.path = path + route.path
+    return route
+  })
+}
+
 module.exports = {
   begin,
   success,
@@ -97,5 +112,7 @@ module.exports = {
   cached,
   commit,
   silence,
-  execute
+  execute,
+  route,
+  prefix
 }
