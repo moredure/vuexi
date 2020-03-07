@@ -1,10 +1,10 @@
-const begin = (loadingField, errorField, func = Function.prototype) => state => {
+export const begin = (loadingField, errorField, func = Function.prototype) => state => {
   state[loadingField] = true
   state[errorField] = null
   func(state)
 }
 
-const success = (loadingField, resultField) => (state, payload = null) => {
+export const success = (loadingField, resultField) => (state, payload = null) => {
   state[loadingField] = false
 
   if (resultField.call) {
@@ -14,17 +14,17 @@ const success = (loadingField, resultField) => (state, payload = null) => {
   }
 }
 
-const silence = (loadingField) => (state) => {
+export const silence = (loadingField) => (state) => {
   state[loadingField] = false
 }
 
-const error = (loadingField, errorField, func = Function.prototype) => (state, err) => {
+export const error = (loadingField, errorField, func = Function.prototype) => (state, err) => {
   state[loadingField] = false
   state[errorField] = err
   func(state)
 }
 
-const query = (type, func) => async (context, request) => {
+export const query = (type, func) => async (context, request) => {
   try {
     context.commit(type)
     const { data: response } = await func(request)
@@ -36,7 +36,7 @@ const query = (type, func) => async (context, request) => {
   }
 }
 
-const poll = (type, func) => async (context, request) => {
+export const poll = (type, func) => async (context, request) => {
   try {
     const { data: response } = await func(request)
     context.commit(`${type}_SUCCESS`, response)
@@ -47,18 +47,18 @@ const poll = (type, func) => async (context, request) => {
   }
 }
 
-function removeById(loadingField, name) {
+export function removeById(loadingField, name) {
   return success(loadingField, (state, argument) => {
     const index = state[name].findIndex(each => each.id === argument.id)
     state[name].splice(index, 1)
   })
 }
 
-function push(loadingField, name) {
+export function push(loadingField, name) {
   return success(loadingField, (state, argument) => state[name].push(argument))
 }
 
-const cached = (type, call, moduleName, modulePath) => async (context, request) => {
+export const cached = (type, call, moduleName, modulePath) => async (context, request) => {
   const founded = context.rootState[moduleName][modulePath].find(each => each.id == request.id)
 
   if (founded) {
@@ -77,25 +77,11 @@ const cached = (type, call, moduleName, modulePath) => async (context, request) 
   }
 }
 
-function commit(event) {
+export function commit(event) {
   return ({ commit }, obj) => commit(event, obj)
 }
 
-const execute = (loadingField, resultField, func) => (state) => {
+export const execute = (loadingField, resultField, func) => (state) => {
   state[loadingField] = false
   state[resultField] = func()
-}
-
-module.exports = {
-  begin,
-  success,
-  error,
-  query,
-  removeById,
-  poll,
-  push,
-  cached,
-  commit,
-  silence,
-  execute
 }
