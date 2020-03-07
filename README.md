@@ -4,6 +4,8 @@ To check entire functionality consider to look into index.js file. Also soon you
 
 ```npm install vuexi```
 
+## Example For Vuex actions and mutations 
+
 ```javascript
 // some random vuex module for view with instances
 import * as InstancesClient from '@/resources/instances'
@@ -40,6 +42,29 @@ export default {
     [QUERY_INSTANCES_FAILURE]: error('isQueryInstancesLoading', 'queryInstancesError') // sets isQueryInstancesLoading to false and queryInstancesError to error from axious call provided to this mutation
   }
 }
+```
+
+## Example for router
+```javascript
+import { route } from 'vuexi'
+
+export default [
+  route('/', Dashboard, {
+    beforeEnter: onUnauthorizedRedirectToLogin,
+    children: [
+      route('', Default, { name: 'default' }),
+      route('user/', UserDashboard, {
+        children: [
+          route('profile', UserProfile, { name: 'user-profile' }),
+          route('', undefined, { name: 'default-user-profile', redirect: { name: 'user-profile' } })
+        ]
+      }),
+      route('project/:projectId', TeamDashboard, {
+        children: [
+          route('', undefined, { name: 'resources', redirect: to => `/project/${to.params.projectId}/users` }),
+          route('users', Users, { name: 'users' }),
+          route('users/new', NewUser, { name: 'new-user' }),
+          route('users/:id/edit', EditUser, { name: 'edit-user' }),
 ```
 
 ## Sponsors
