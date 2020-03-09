@@ -1,4 +1,6 @@
 # Vuexi
+Work in progress, so breaking changes in API is possible. Please consider locking dependency if this lib fit your needs!
+
 Vuexi is a toolset of small but very useful functions to reduce vuex code base for async flows and adds optional caching, etc.
 To check entire functionality consider to look into index.js file. Also soon you will be able to checkout presentation of this library in https://odessafrontend.com/15/ video [Vuexi Presentation](https://www.youtube.com/watch?v=Q_olFkYVakg) also on NPMjs https://www.npmjs.com/package/vuexi.
 
