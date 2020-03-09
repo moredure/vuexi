@@ -58,6 +58,10 @@ export function push(loadingField, name) {
   return success(loadingField, (state, argument) => state[name].push(argument))
 }
 
+export function unshift(loadingField, name) {
+  return success(loadingField, (state, argument) => state[name].unshift(argument))
+}
+
 export const cached = (type, call, moduleName, modulePath) => async (context, request) => {
   const founded = context.rootState[moduleName][modulePath].find(each => each.id == request.id)
 
