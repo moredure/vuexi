@@ -54,6 +54,10 @@ function removeById(loadingField, name) {
   })
 }
 
+function unshift(loadingField, name) {
+  return success(loadingField, (state, argument) => state[name].unshift(argument))
+}
+
 function push(loadingField, name) {
   return success(loadingField, (state, argument) => state[name].push(argument))
 }
