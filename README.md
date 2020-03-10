@@ -1,4 +1,6 @@
 # Vuexi
+[![Maintainability](https://api.codeclimate.com/v1/badges/424d9ad5403bdf92aa92/maintainability)](https://codeclimate.com/github/mikefaraponov/vuexi/maintainability)
+
 Work in progress, so breaking changes in API are possible. Please consider locking dependency if this library fit your needs!
 
 Vuexi is a toolset of small but very useful functions to reduce vuex code base for async flows and adds optional caching, etc.
