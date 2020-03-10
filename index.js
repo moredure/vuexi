@@ -24,18 +24,6 @@ const error = (loadingField, errorField, func = Function.prototype) => (state, e
   func(state)
 }
 
-const query = (type, func) => async (context, request) => {
-  try {
-    context.commit(type)
-    const { data: response } = await func(request)
-    context.commit(`${type}_SUCCESS`, response)
-    return response
-  } catch (err) {
-    context.commit(`${type}_FAILURE`, err)
-    throw err
-  }
-}
-
 const poll = (type, func) => async (context, request) => {
   try {
     const { data: response } = await func(request)
@@ -62,14 +50,7 @@ function push(loadingField, name) {
   return success(loadingField, (state, argument) => state[name].push(argument))
 }
 
-const cached = (type, call, moduleName, modulePath) => async (context, request) => {
-  const founded = context.rootState[moduleName][modulePath].find(each => each.id == request.id)
-
-  if (founded) {
-    context.commit(`${type}_SUCCESS`, founded)
-    return founded
-  }
-
+const query = (type, call) => async (context, request) => {
   try {
     context.commit(type)
     const { data: response } = await call(request)
@@ -79,6 +60,20 @@ const cached = (type, call, moduleName, modulePath) => async (context, request) 
     context.commit(`${type}_FAILURE`, err)
     throw err
   }
+}
+
+const cached = (type, call, moduleName, modulePath) => {
+  const action = query(type, call)
+  return async (context, request) => {
+    const founded = context.rootState[moduleName][modulePath].find(each => each.id == request.id)
+
+    if (founded) {
+      context.commit(`${type}_SUCCESS`, founded)
+      return founded
+    }
+
+    return action(context, request)
+  } 
 }
 
 function commit(event) {
