@@ -8,6 +8,8 @@ To check entire functionality consider to look into index.js file. Also you can 
 
 ```npm install vuexi```
 
+```yarn add vuexi```
+
 ## Example For Vuex actions and mutations 
 
 ```javascript
