@@ -37,7 +37,7 @@ export default {
     queryInstancesError: null
   },
   actions: {
-    // InstancesClient.getInstances is a axious call
+    // InstancesClient.getInstances is a axios async call
     queryInstances: query(QUERY_INSTANCES, InstancesClient.getInstances), // used for initial load of state
     pollInstances: poll(QUERY_INSTANCES, InstancesClient.getInstances), // used for polling purposes with setInterval
   },
