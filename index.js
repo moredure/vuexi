@@ -100,6 +100,18 @@ function prefix (path, routes) {
   })
 }
 
+function set (field) {
+  return (state, result) => {
+    state[field] = result
+  }
+}
+
+function assign (loadingField, field) {
+  return success(loadingField, (state, result) => {
+    state[field] = Object.assign({}, state[field], result)
+  })
+}
+
 module.exports = {
   begin,
   success,
@@ -113,5 +125,7 @@ module.exports = {
   silence,
   execute,
   route,
-  prefix
+  prefix,
+  set,
+  assign
 }
