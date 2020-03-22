@@ -104,3 +104,15 @@ export function prefix (path, routes) {
     return route
   })
 }
+
+export function set (field) {
+  return (state, result) => {
+    state[field] = result
+  }
+}
+
+export function assign (loadingField, field) {
+  return success(loadingField, (state, result) => {
+    state[field] = Object.assign({}, state[field], result)
+  })
+}
