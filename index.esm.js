@@ -112,6 +112,11 @@ export function set (field) {
 }
 
 export function assign (loadingField, field) {
+  if (!field) {
+    return (state, result) => {
+      state[loadingField] = Object.assign({}, state[loadingField], result)
+    }
+  }
   return success(loadingField, (state, result) => {
     state[field] = Object.assign({}, state[field], result)
   })
