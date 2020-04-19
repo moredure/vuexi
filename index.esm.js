@@ -26,7 +26,7 @@ export const error = (loadingField, errorField, func = Function.prototype) => (s
 
 export const query = (type, func) => async (context, request) => {
   try {
-    context.commit(type)
+    context.commit(type.toString())
     const { data: response } = await func(request)
     context.commit(`${type}_SUCCESS`, response)
     return response
@@ -71,7 +71,7 @@ export const cached = (type, call, moduleName, modulePath) => async (context, re
   }
 
   try {
-    context.commit(type)
+    context.commit(type.toString())
     const { data: response } = await call(request)
     context.commit(`${type}_SUCCESS`, response)
     return response

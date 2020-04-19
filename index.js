@@ -52,7 +52,7 @@ function push(loadingField, name) {
 
 const query = (type, call) => async (context, request) => {
   try {
-    context.commit(type)
+    context.commit(type.toString())
     const { data: response } = await call(request)
     context.commit(`${type}_SUCCESS`, response)
     return response
@@ -134,5 +134,6 @@ module.exports = {
   route,
   prefix,
   set,
-  assign
+  assign,
+  unshift
 }

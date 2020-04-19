@@ -1,17 +1,24 @@
 {
   "name": "vuexi",
-  "version": "1.1.8",
+  "version": "1.1.10",
   "description": "Vuex and Vue Router helper functions",
-  "keywords": ["vuex", "vue", "vue-router"],
+  "keywords": [
+    "vuex",
+    "vue",
+    "vue-router"
+  ],
   "main": "index.js",
   "module": "index.esm.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/mikefaraponov/vuexi"
+    "type": "git",
+    "url": "https://github.com/mikefaraponov/vuexi"
   },
   "author": "Mikhail Faraponov",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "vuexi": "^1.1.9"
+  }
 }
