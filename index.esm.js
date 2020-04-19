@@ -4,6 +4,12 @@ export const begin = (loadingField, errorField, func = Function.prototype) => st
   func(state)
 }
 
+export function nil (key) {
+  return (state) => {
+    state[key] = null
+  }
+}
+
 export const success = (loadingField, resultField) => (state, payload = null) => {
   state[loadingField] = false
 

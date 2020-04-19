@@ -4,6 +4,12 @@ const begin = (loadingField, errorField, func = Function.prototype) => state => 
   func(state)
 }
 
+function nil (key) {
+  return (state) => {
+    state[key] = null
+  }
+}
+
 const success = (loadingField, resultField) => (state, payload = null) => {
   state[loadingField] = false
 
@@ -135,5 +141,6 @@ module.exports = {
   prefix,
   set,
   assign,
-  unshift
+  unshift,
+  nil
 }
