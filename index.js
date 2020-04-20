@@ -1,3 +1,16 @@
+const M = {
+  of: function (value) {
+    const m = {
+      toString: function () {
+        return value
+      },
+      SUCCESS: value + '_SUCCESS',
+      FAILURE: value + '_FAILURE'
+    }
+    return m
+  }
+}
+
 const begin = (loadingField, errorField, func = Function.prototype) => state => {
   state[loadingField] = true
   state[errorField] = null
@@ -123,8 +136,6 @@ function assign (loadingField, field) {
   })
 }
 
-
-
 module.exports = {
   begin,
   success,
@@ -142,5 +153,6 @@ module.exports = {
   set,
   assign,
   unshift,
-  nil
+  nil,
+  M
 }

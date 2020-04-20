@@ -4,6 +4,19 @@ export const begin = (loadingField, errorField, func = Function.prototype) => st
   func(state)
 }
 
+export const M = {
+  of: function (value) {
+    const m = {
+      toString: function () {
+        return value
+      },
+      SUCCESS: value + '_SUCCESS',
+      FAILURE: value + '_FAILURE'
+    }
+    return m
+  }
+}
+
 export function nil (key) {
   return (state) => {
     state[key] = null
