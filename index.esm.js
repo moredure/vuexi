@@ -23,8 +23,11 @@ export function nil (key) {
   }
 }
 
-export const success = (loadingField, resultField) => (state, payload = null) => {
+export const success = (loadingField, resultField, errorField = false) => (state, payload = null) => {
   state[loadingField] = false
+  if (errorField) {
+    state[errorField] = null
+  }
 
   if (resultField.call) {
     resultField(state, payload)

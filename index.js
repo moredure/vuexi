@@ -23,8 +23,11 @@ function nil (key) {
   }
 }
 
-const success = (loadingField, resultField) => (state, payload = null) => {
+const success = (loadingField, resultField, errorField = false) => (state, payload = null) => {
   state[loadingField] = false
+  if (errorField) {
+    state[errorField] = null
+  }
 
   if (resultField.call) {
     resultField(state, payload)
