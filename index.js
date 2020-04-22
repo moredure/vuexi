@@ -48,8 +48,8 @@ const error = (loadingField, errorField, func = Function.prototype) => (state, e
 
 const poll = (type, func) => async (context, request) => {
   try {
-    const { data: response } = await func(request)
-    context.commit(`${type}_SUCCESS`, response)
+    const response = await func(request)
+    context.commit(`${type}_SUCCESS`, response.data)
     return response
   } catch (err) {
     context.commit(`${type}_FAILURE`, err)
@@ -75,8 +75,8 @@ function push(loadingField, name) {
 const query = (type, call) => async (context, request) => {
   try {
     context.commit(type.toString())
-    const { data: response } = await call(request)
-    context.commit(`${type}_SUCCESS`, response)
+    const response = await call(request)
+    context.commit(`${type}_SUCCESS`, response.data)
     return response
   } catch (err) {
     context.commit(`${type}_FAILURE`, err)
@@ -91,7 +91,7 @@ const cached = (type, call, moduleName, modulePath) => {
 
     if (founded) {
       context.commit(`${type}_SUCCESS`, founded)
-      return founded
+      return { data: founded }
     }
 
     return action(context, request)
