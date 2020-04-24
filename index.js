@@ -91,7 +91,7 @@ const query = (type, call) => async (context, request) => {
 const cached = (type, call, moduleName, modulePath) => {
   const action = query(type, call)
   return async (context, request) => {
-    const founded = context.rootState[moduleName][modulePath].find(each => each.id == request.id)
+    const founded = context.rootState[moduleName][modulePath || moduleName].find(each => each.id == request.id)
 
     if (founded) {
       context.commit(`${type}_SUCCESS`, founded)
