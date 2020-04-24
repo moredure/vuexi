@@ -14,9 +14,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mikefaraponov/vuexi"
+    "url": "https://github.com/moredure/vuexi"
   },
-  "author": "Mikhail Faraponov",
   "license": "ISC",
   "dependencies": {
   }
