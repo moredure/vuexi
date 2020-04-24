@@ -23,11 +23,9 @@ export function createInstance({ projectId, ...options }) {
   return HTTP.post(`/projects/${projectId}/instances`, options)
 }
 */
-import { begin, success, error, query, poll } from 'vuexi'
+import { begin, success, error, query, poll, M } from 'vuexi'
 
-const QUERY_INSTANCES = 'QUERY_INSTANCES'
-const QUERY_INSTANCES_SUCCESS = 'QUERY_INSTANCES_SUCCESS'
-const QUERY_INSTANCES_FAILURE = 'QUERY_INSTANCES_FAILURE'
+const QUERY_INSTANCES = M.of('QUERY_INSTANCES')
 
 export default {
   namespaced: true,
@@ -43,9 +41,9 @@ export default {
   },
   mutations: {
     [QUERY_INSTANCES]: begin('isQueryInstancesLoading', 'queryInstancesError'), // essentialy is a macros to set isQueryInstancesLoading to true and queryInstancesError to null
-    [QUERY_INSTANCES_SUCCESS]: success('isQueryInstancesLoading', 'instances'), // sets isQueryInstancesLoading to false and instances from axios data object provided to this mutation from "query" or "poll" helper
+    [QUERY_INSTANCES.SUCCESS]: success('isQueryInstancesLoading', 'instances'), // sets isQueryInstancesLoading to false and instances from axios data object provided to this mutation from "query" or "poll" helper
     // success call can be replaces with any other to modify state on your purpose (removeById, push, silence, etc)
-    [QUERY_INSTANCES_FAILURE]: error('isQueryInstancesLoading', 'queryInstancesError') // sets isQueryInstancesLoading to false and queryInstancesError to error from axious call provided to this mutation
+    [QUERY_INSTANCES.FAILURE]: error('isQueryInstancesLoading', 'queryInstancesError') // sets isQueryInstancesLoading to false and queryInstancesError to error from axious call provided to this mutation
   }
 }
 ```
