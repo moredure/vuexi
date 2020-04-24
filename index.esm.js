@@ -17,6 +17,8 @@ export const M = {
   }
 }
 
+const isCancel = (value) => !!(value && value.__CANCEL__)
+
 export function nil (key) {
   return (state) => {
     state[key] = null
@@ -53,7 +55,9 @@ export const query = (type, func) => async (context, request) => {
     context.commit(`${type}_SUCCESS`, response.data)
     return response
   } catch (err) {
-    context.commit(`${type}_FAILURE`, err)
+    if (!isCancel(err)) {
+      context.commit(`${type}_FAILURE`, err)
+    }
     throw err
   }
 }
@@ -64,7 +68,9 @@ export const poll = (type, func) => async (context, request) => {
     context.commit(`${type}_SUCCESS`, response.data)
     return response
   } catch (err) {
-    context.commit(`${type}_FAILURE`, err)
+    if (!isCancel(err)) {
+      context.commit(`${type}_FAILURE`, err)
+    }
     throw err
   }
 }
@@ -84,23 +90,18 @@ export function unshift(loadingField, name) {
   return success(loadingField, (state, argument) => state[name].unshift(argument))
 }
 
-export const cached = (type, call, moduleName, modulePath) => async (context, request) => {
-  const founded = context.rootState[moduleName][modulePath].find(each => each.id == request.id)
+export const cached = (type, call, moduleName, modulePath) => {
+  const action = query(type, call)
+  return async (context, request) => {
+    const founded = context.rootState[moduleName][modulePath].find(each => each.id == request.id)
 
-  if (founded) {
-    context.commit(`${type}_SUCCESS`, founded)
-    return { data: founded }
-  }
+    if (founded) {
+      context.commit(`${type}_SUCCESS`, founded)
+      return { data: founded }
+    }
 
-  try {
-    context.commit(type.toString())
-    const response = await call(request)
-    context.commit(`${type}_SUCCESS`, response.data)
-    return response
-  } catch (err) {
-    context.commit(`${type}_FAILURE`, err)
-    throw err
-  }
+    return action(context, request)
+  } 
 }
 
 export function commit(event) {

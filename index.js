@@ -11,6 +11,8 @@ const M = {
   }
 }
 
+const isCancel = (value) => !!(value && value.__CANCEL__)
+
 const begin = (loadingField, errorField, func = Function.prototype) => state => {
   state[loadingField] = true
   state[errorField] = null
@@ -79,7 +81,9 @@ const query = (type, call) => async (context, request) => {
     context.commit(`${type}_SUCCESS`, response.data)
     return response
   } catch (err) {
-    context.commit(`${type}_FAILURE`, err)
+    if (!isCancel(err)) {
+      context.commit(`${type}_FAILURE`, err)
+    }
     throw err
   }
 }
