@@ -19,6 +19,14 @@ export const M = {
 
 const isCancel = (value) => !!(value && value.__CANCEL__)
 
+export function action (m, func, loadingField, objectField, errorField) {
+  return {
+    [m]: begin(loadingField, errorField),
+    [m.SUCCESS]: func(loadingField, objectField, errorField),
+    [m.FAILURE]: error(loadingField, errorField)
+  }
+}
+
 export function nil (key) {
   return (state) => {
     state[key] = null

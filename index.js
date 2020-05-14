@@ -143,6 +143,14 @@ function assign (loadingField, field) {
   })
 }
 
+function action (m, func, loadingField, objectField, errorField) {
+  const x = {}
+  x[m] = begin(loadingField, errorField)
+  x[m.SUCCESS] = func(loadingField, objectField, errorField)
+  x[m.FAILURE] = error(loadingField, errorField)
+  return x
+}
+
 module.exports = {
   begin,
   success,
@@ -161,5 +169,6 @@ module.exports = {
   assign,
   unshift,
   nil,
-  M
+  M,
+  action
 }
