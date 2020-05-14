@@ -19,7 +19,7 @@ export const M = {
 
 const isCancel = (value) => !!(value && value.__CANCEL__)
 
-export function action (m, func, loadingField, objectField, errorField) {
+export function action (m, loadingField, objectField, errorField, func) {
   return {
     [m]: begin(loadingField, errorField),
     [m.SUCCESS]: func(loadingField, objectField, errorField),

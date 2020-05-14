@@ -1,6 +1,6 @@
 {
   "name": "vuexi",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Vuex and Vue Router helper functions",
   "keywords": [
     "vuex",

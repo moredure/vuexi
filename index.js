@@ -143,7 +143,7 @@ function assign (loadingField, field) {
   })
 }
 
-function action (m, func, loadingField, objectField, errorField) {
+function action (m, loadingField, objectField, errorField, func) {
   const x = {}
   x[m] = begin(loadingField, errorField)
   x[m.SUCCESS] = func(loadingField, objectField, errorField)
