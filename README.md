@@ -23,7 +23,7 @@ export function createInstance({ projectId, ...options }) {
   return HTTP.post(`/projects/${projectId}/instances`, options)
 }
 */
-import { begin, success, error, query, poll, M } from 'vuexi'
+import { begin, success, error, query, poll, M, action } from 'vuexi'
 
 const QUERY_INSTANCES = M.of('QUERY_INSTANCES')
 
@@ -40,6 +40,9 @@ export default {
     pollInstances: poll(QUERY_INSTANCES, InstancesClient.getInstances), // used for polling purposes with setInterval
   },
   mutations: {
+     // like this 
+     ...action(QUERY_INSTANCES, 'isQueryInstancesLoading', 'instances', 'queryInstancesError', success)
+     // is the same as like this
     [QUERY_INSTANCES]: begin('isQueryInstancesLoading', 'queryInstancesError'), // essentialy is a macros to set isQueryInstancesLoading to true and queryInstancesError to null
     [QUERY_INSTANCES.SUCCESS]: success('isQueryInstancesLoading', 'instances'), // sets isQueryInstancesLoading to false and instances from axios data object provided to this mutation from "query" or "poll" helper
     // success call can be replaces with any other to modify state on your purpose (removeById, push, silence, etc)
