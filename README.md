@@ -41,7 +41,7 @@ export default {
   },
   mutations: {
      // like this 
-     ...action(QUERY_INSTANCES, 'isQueryInstancesLoading', 'instances', 'queryInstancesError', success)
+     ...action(QUERY_INSTANCES, 'isQueryInstancesLoading', 'instances', 'queryInstancesError', success),
      // is the same as like this
     [QUERY_INSTANCES]: begin('isQueryInstancesLoading', 'queryInstancesError'), // essentialy is a macros to set isQueryInstancesLoading to true and queryInstancesError to null
     [QUERY_INSTANCES.SUCCESS]: success('isQueryInstancesLoading', 'instances'), // sets isQueryInstancesLoading to false and instances from axios data object provided to this mutation from "query" or "poll" helper
