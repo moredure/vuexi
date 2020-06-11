@@ -152,3 +152,10 @@ export function assign (loadingField, field) {
     state[field] = Object.assign({}, state[field], result)
   })
 }
+
+export function assignById (loadingField, name, errorField) {
+  return success(loadingField, (state, argument) => {
+    const index = state[name].findIndex(each => each.id === argument.id)
+    Object.assign(state[name][index], argument)
+  }, errorField)
+}
