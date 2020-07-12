@@ -75,4 +75,4 @@ export default [
 ```
 
 ## Sponsors
-Vuexi used by [ScalableSpace](https://scalablespace.net) and by [ScaleChamp](https://scalechamp.com)
+Vuexi used by [ScaleChamp](https://scalechamp.com)
